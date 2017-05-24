@@ -30,8 +30,36 @@ public abstract class Customer {
 	 * @throws CustomerException if supplied parameters are invalid 
 	 * 
 	 */
+	
+	//In case not working this.variable
+	private String customerName;
+	private String customerMobileNumber;
+	private int customerLocationX;
+	private int customerLocationY;
+	private String customerType;
+	
 	public Customer(String name, String mobileNumber, int locationX, int locationY, String type) throws CustomerException{
-		// TO DO
+		
+		int firstDigit = Integer.parseInt(mobileNumber.substring(0, 1));
+		int lengthNumber = Integer.valueOf(mobileNumber).toString().length();
+		
+		if (name.length() < 1 || name.length() > 20) {
+			throw new CustomerException("The name must be between 1 and 20 characters long");
+		} else if (name.trim().length() < 1) {
+			throw new CustomerException("The name cannot be all whitespace");			
+		} else if (locationX > 10 || locationX < -10 || locationY > 10 || locationY < -10) {
+			throw new CustomerException("The location can't be greater than 10 blocks north, south, east or west from the restuarant");
+		} else if (firstDigit != 0) {
+			throw new CustomerException("The first digit needs to be a 0");
+		} else if (lengthNumber != 10) {
+			throw new CustomerException("The length of the phoneNumber needs to be equal to 10");
+		} 
+		
+		customerName = name;
+		customerMobileNumber = mobileNumber;
+		customerLocationX = locationX;
+		customerLocationY = locationY;
+		customerType = type;
 	}
 	
 	/**
@@ -39,7 +67,8 @@ public abstract class Customer {
 	 * @return The Customer's name.
 	 */
 	public final String getName(){
-		// TO DO
+		
+		return customerName;
 	}
 	
 	/**
@@ -47,7 +76,8 @@ public abstract class Customer {
 	 * @return The Customer's mobile number.
 	 */
 	public final String getMobileNumber(){
-		// TO DO
+		
+		return customerMobileNumber;
 	}
 
 	/**
@@ -56,7 +86,8 @@ public abstract class Customer {
 	 * @return A human understandable description of the Customer's type.
 	 */
 	public final String getCustomerType(){
-		// TO DO
+
+		return customerType;
 	}
 	
 	/**
@@ -65,7 +96,8 @@ public abstract class Customer {
 	 * @return The Customer's X location
 	 */
 	public final int getLocationX(){
-		// TO DO
+		
+		return customerLocationX;
 	}
 
 	/**
@@ -74,7 +106,8 @@ public abstract class Customer {
 	 * @return The Customer's Y location
 	 */
 	public final int getLocationY(){
-		// TO DO
+
+		return customerLocationY;
 	}
 
 	/**
@@ -84,7 +117,6 @@ public abstract class Customer {
 	 */
 	public abstract double getDeliveryDistance();
 
-	
 	
 	/**
 	 * Compares *this* Customer object with an instance of an *other* Customer object and returns true if  
@@ -104,5 +136,3 @@ public abstract class Customer {
 			(this.getLocationY() == otherCustomer.getLocationY()) && 
 			(this.getCustomerType().equals(otherCustomer.getCustomerType())) );			
 	}
-
-}
