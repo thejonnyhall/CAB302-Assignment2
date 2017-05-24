@@ -3,10 +3,11 @@ package asgn2Restaurant;
 import java.util.ArrayList;
 
 import asgn2Customers.Customer;
+import asgn2Exceptions.CustomerException;
 import asgn2Pizzas.Pizza;
 
 /**
- * This class acts as a ‘model’ of a pizza restaurant. It contains an ArrayList of Pizza objects and an ArrayList of  Customer objects.
+ * This class acts as a ï¿½modelï¿½ of a pizza restaurant. It contains an ArrayList of Pizza objects and an ArrayList of  Customer objects.
  *  It contains a method that can populate the ArrayLists,  several methods to retrieve information about the ArrayLists and 
  *  a method to reset the array list. Information about the x and y location of the restaurant and the time that first and last 
  *  orders are accepted are listed in Section 5 of the Assignment Specification. 
@@ -32,7 +33,8 @@ public class PizzaRestaurant {
 	 * 
 	 */
 	public PizzaRestaurant() {
-		// TO DO
+		customers = new ArrayList<Customer>();
+		pizzas = new ArrayList<Pizza>();
 	}
 
 	/**
@@ -51,6 +53,8 @@ public class PizzaRestaurant {
      *
 	 */
 	public boolean processLog(String filename) throws CustomerException, PizzaException, LogHandlerException{
+		// Dont know what to do here yet
+		return false;
 		// TO DO
 	}
 
@@ -61,7 +65,9 @@ public class PizzaRestaurant {
 	 * @throws CustomerException if index is invalid.
 	 */
 	public Customer getCustomerByIndex(int index) throws CustomerException{
-		// TO DO
+		if (customers.size() - 1 >= index) {
+			return customers.get(index);
+		} else throw new CustomerException("A customer doesn't exist with this index");
 	}
 	
 	/**
@@ -102,7 +108,11 @@ public class PizzaRestaurant {
 	 * @return the total delivery distance for all Customers objects in the customers field.
 	 */
 	public double getTotalDeliveryDistance(){
-		// TO DO
+		double totalDistance = 0;
+		for (Customer customer: customers) {
+			totalDistance += customer.getDeliveryDistance();
+		}
+		return totalDistance;
 	}
 
 	/**
@@ -121,7 +131,8 @@ public class PizzaRestaurant {
 	 * <P> POST:  The pizzas and customers fields are set to their initial empty states
 	 */
 	public void resetDetails(){
-		// TO DO
+		customers = new ArrayList<Customer>();
+		pizzas = new ArrayList<Pizza>();
 	}
 
 }

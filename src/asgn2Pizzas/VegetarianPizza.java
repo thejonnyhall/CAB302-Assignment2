@@ -1,6 +1,8 @@
 package asgn2Pizzas;
 
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import asgn2Exceptions.PizzaException;
 
@@ -15,6 +17,8 @@ import asgn2Exceptions.PizzaException;
  *
  */
 public class VegetarianPizza extends Pizza {
+	
+	private List<PizzaTopping> toppings = new ArrayList<PizzaTopping>();
 
 	/**
 	 * 
@@ -32,7 +36,41 @@ public class VegetarianPizza extends Pizza {
 	 *
 	 */
 	public VegetarianPizza(int quantity, LocalTime orderTime, LocalTime deliveryTime) throws PizzaException {
-		// TO DO
+		
+		super(quantity, orderTime, deliveryTime, "Vegetarian", 10);
+		
+		if (quantity > 10) {			
+			throw new PizzaException("Too many pizzas ordered");
+		}
+		else if (quantity < 1){			
+			throw new PizzaException("No pizzas ordered");
+		}
+		else if (orderTime == deliveryTime){			
+			throw new PizzaException("Cannot deliver a pizza instantaneously");
+		}
+		else if (orderTime.isBefore(deliveryTime)){			
+			throw new PizzaException("Cannot deliver pizza before it was ordered");
+		}
+		else if (deliveryTime.getMinute() - orderTime.getMinute() < 10){			
+			throw new PizzaException("Must allow 10 minutes to cook pizza");
+		}
+		else if (deliveryTime.getHour() - orderTime.getHour() > 1){			
+			throw new PizzaException("Pizza has expired and must be thrown out");
+		}
+		else if (orderTime.getHour() < 7){			
+			throw new PizzaException("Kitchen is not yet open at this time");
+		}
+		else if (orderTime.getHour() >= 23){			
+			throw new PizzaException("Kitchen is now closed");
+		}			
+		setToppings();
 	}
-
+	private void setToppings(){
+		
+		pizzaToppings.add(PizzaTopping.CHEESE);
+		pizzaToppings.add(PizzaTopping.TOMATO);
+		pizzaToppings.add(PizzaTopping.CAPSICUM);
+		pizzaToppings.add(PizzaTopping.EGGPLANT);
+		pizzaToppings.add(PizzaTopping.MUSHROOM);
+	}
 }

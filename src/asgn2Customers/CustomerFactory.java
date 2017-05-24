@@ -29,7 +29,5 @@ public class CustomerFactory {
 	 */
 	public static Customer getCustomer(String customerCode, String name, String mobileNumber, int locationX,  int locationY) throws CustomerException{
 		// TO DO
-		//Hecking doggo this is my committ
-		
 	}
 }
