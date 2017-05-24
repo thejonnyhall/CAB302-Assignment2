@@ -27,17 +27,27 @@ public class PickUpCustomer extends Customer {
 	 * 
 	 */
 	public PickUpCustomer(String name, String mobileNumber, int locationX,  int locationY) throws CustomerException {
-		// TO DO	
+		
+		super(name, mobileNumber, locationX, locationY, "Pick Up");
+		
+		int firstDigit = Integer.parseInt(mobileNumber.substring(0, 1));
+		int lengthNumber = Integer.valueOf(mobileNumber).toString().length();
+		if (name.length() < 1 || name.length() > 20) {
+			throw new CustomerException("The customers name needs to be been 1 character and 20 characters long");
+		} else if (firstDigit != 0) {
+			throw new CustomerException("The first digit needs to be a 0");
+		} else if (lengthNumber != 10) {
+			throw new CustomerException("The length of the phoneNumber needs to be equal to 10");
+		} 	
 	}
 
 	/**
-	 *  Overrides DeliveryDistance() in Customer. Since the customer is at the restaurant the delivery distance should be zero. 
+	 *  Overrides DeliveryDistance() in Customer. The customer has no delivery distance, because its pickup. 
 	 *  
      * @return The value 0
 	 */
 	@Override
 	public double getDeliveryDistance() {
-		// TO DO
+		return 0;	
 	}
-
 }
