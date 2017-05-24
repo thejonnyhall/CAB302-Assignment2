@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import asgn2Customers.Customer;
 import asgn2Exceptions.CustomerException;
+import asgn2Exceptions.PizzaException;
 import asgn2Pizzas.Pizza;
 
 /**
@@ -53,9 +54,13 @@ public class PizzaRestaurant {
      *
 	 */
 	public boolean processLog(String filename) throws CustomerException, PizzaException, LogHandlerException{
-		// Dont know what to do here yet
-		return false;
-		// TO DO
+		
+		for (int line = 0; line < LogHandler.populateCustomerDataset(filename).size(); line++){
+			LogHandler.createCustomer(Integer.toString(line));
+		}
+		for (int line = 0; line < LogHandler.populatePizzaDataset(filename).size(); line++){
+			LogHandler.createPizza(Integer.toString(line));
+		}
 	}
 
 	/**
@@ -77,7 +82,12 @@ public class PizzaRestaurant {
 	 * @throws PizzaException if index is invalid.
 	 */	
 	public Pizza getPizzaByIndex(int index) throws PizzaException{
-		// TO DO
+		try{
+			pizzas.get(index);
+		}catch(Exception e){
+			System.out.println("Pizza index is invalid");
+		}
+		return pizzas.get(index);
 	}
 	
 	/**
@@ -87,7 +97,8 @@ public class PizzaRestaurant {
 	 * @return the number of objects contained in the pizzas field.
 	 */
 	public int getNumPizzaOrders(){
-		// TO DO
+		return pizzas.size();
+		// Yet to confirm dis
 	}
 
 	/**
@@ -97,7 +108,7 @@ public class PizzaRestaurant {
 	 * @return the number of objects contained in the customers field.
 	 */
 	public int getNumCustomerOrders(){
-		// TO DO
+		return customers.size();
 	}
 
 			
@@ -121,6 +132,7 @@ public class PizzaRestaurant {
 	 * @return the total profit for all of the Pizza objects in the pizzas field.
 	 */	
 	public double getTotalProfit(){
+		return 0;
 		// TO DO
 	}
 	
